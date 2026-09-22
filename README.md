@@ -31,28 +31,28 @@ citation points at data that does not move under you.
 
 | Column | Notes |
 |---|---|
-| `spirit_type` |  |
-| `distillery` |  |
-| `distillery_location` |  |
-| `spirit_name` |  |
-| `producer_type` |  |
-| `producer_brand` |  |
-| `is_ndp` |  |
-| `is_template` |  |
-| `special_designation` |  |
-| `age_statement` |  |
-| `vintage` |  |
-| `batch_lot` |  |
-| `proof` |  |
-| `abv` |  |
-| `mash_bill` |  |
-| `barrel_type` |  |
-| `cask_finish` |  |
-| `tasting_notes` |  |
-| `source_urls` |  |
-| `last_verified` |  |
-| `label_image_url` |  |
-| `cohort` |  |
+| `spirit_type` | Category name, e.g. `Bourbon`, `Scotch`, `Armagnac`. |
+| `distillery` | Legal or branded distillery name, suffixes stripped. |
+| `distillery_location` | Where it was actually distilled, `City, State` or `City, Country`. Not corporate HQ. |
+| `spirit_name` | Brand line only, e.g. `Elijah Craig`. |
+| `producer_type` | Origin of the liquid: `own_make`, `sourced`, `blended`, `unknown`. |
+| `producer_brand` | The bottler when it differs from the distillery (third-party releases). `NULL` for a distillery's own house brand. |
+| `is_ndp` | Non-distiller producer. Derived: `TRUE` when `producer_brand` is set, `NULL` when `producer_type` is `unknown`. |
+| `is_template` | `TRUE` when the row is an umbrella for a programme with per-bottle variation (single-barrel picks, private selections). Those rows have `proof`, `abv`, `batch_lot` and `vintage` `NULL` by design. |
+| `special_designation` | Named sub-line or expression, e.g. `Barrel Proof`. `NULL` if just the core brand. |
+| `age_statement` | `X Years` if stated, `NAS` if explicitly not age stated, `NULL` if unknown. |
+| `vintage` | Producer-labelled year. Distillation year for vintage Cognac, Armagnac and Calvados. `NULL` for multi-year blends. |
+| `batch_lot` | Producer's batch or release identifier, verbatim. |
+| `proof` | US proof (2 × ABV). |
+| `abv` | Alcohol by volume, one decimal. |
+| `mash_bill` | Grain recipe, percentages summing to 100. **Used for the recipe in every category, not only bourbon-style spirits** — for categories with no traditional mash bill it carries whatever the producer discloses about composition. Descriptors such as `wheated` or `high-rye` only where percentages are not published. |
+| `barrel_type` | Primary maturation cask. |
+| `cask_finish` | Secondary maturation cask, `NULL` if none. |
+| `tasting_notes` | Producer notes where available. Third-party notes are prefixed with their source, e.g. `[Whisky Advocate]`. |
+| `source_urls` | Semicolon-separated URLs substantiating the row. Never null. |
+| `last_verified` | ISO date the row was last confirmed against its sources. Never null. |
+| `label_image_url` | Link to a bottle or label image hosted elsewhere, preferring the producer's own page. `NULL` rather than a stock placeholder. |
+| `cohort` | Added at packaging time from the source filename, e.g. `bourbon_kentucky_craft`. |
 
 `cohort` is added at packaging time. In the working project the grouping lived
 only in the filename, which meant a naive merge would lose the distinction
@@ -74,7 +74,8 @@ Completeness varies by field, and the dataset does not pretend otherwise:
 | `mash_bill` | 38.5% |
 
 A blank is a blank. Where a value could not be sourced it is empty or `NULL`
-rather than inferred.
+rather than inferred, and rows flagged `is_template` carry deliberate nulls in
+`proof`, `abv`, `batch_lot` and `vintage` because those vary bottle to bottle.
 
 ## Provenance, and a word on tasting notes
 
