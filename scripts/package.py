@@ -20,6 +20,18 @@ EXCLUDE = {"bourbon_ndp_audit", "bourbon_template_audit"}
 # bourbon_kentucky_craft from bourbon_indiana.
 COHORT_COL = "cohort"
 
+# Held out of the public release. CC BY 4.0 grants downstream users the right to
+# copy, adapt and commercialise the whole dataset, and that right cannot be
+# granted over text we do not own. An audit on 2026-09-22 found 5,525 of 5,744
+# notes carried no source tag and 679 contained full sentences, with producer
+# marketing copy present verbatim (Tariquet Armagnac, checked against the
+# producer's own page). Factual attributes are not copyrightable; that prose is.
+#
+# The column returns once a maintenance pass applies the rule now recorded in
+# research_system_prompt.md: original descriptors only, never verbatim, source
+# tag required.
+DROP_FROM_PUBLIC = {"tasting_notes"}
+
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -33,26 +45,50 @@ def main() -> int:
         print("no source CSVs found", file=sys.stderr)
         return 1
 
-    os.makedirs(os.path.join(a.out, "by_cohort"), exist_ok=True)
-    header, rows, cohorts, drift = None, [], [], []
+    # Two passes. The first only reads headers, so a schema mismatch is caught
+    # before anything is written. The original single pass wrote by_cohort files
+    # as it went and checked drift at the end, which meant a refused build left
+    # partial output on disk for the next run to trip over.
+    header, drift = None, []
+    for f in files:
+        with open(f, newline="", encoding="utf-8-sig", errors="replace") as fh:
+            fields = list(csv.DictReader(fh).fieldnames or [])
+        if header is None:
+            header = fields
+        elif fields != header:
+            drift.append(os.path.basename(f))
+    if drift:
+        print(f"REFUSING: {len(drift)} file(s) have a different schema: {drift}",
+              file=sys.stderr)
+        print("  nothing was written.", file=sys.stderr)
+        return 1
+
+    bycohort = os.path.join(a.out, "by_cohort")
+    if os.path.isdir(bycohort):
+        for stale in glob.glob(os.path.join(bycohort, "*.csv")):
+            os.remove(stale)
+    os.makedirs(bycohort, exist_ok=True)
+    rows, cohorts, empty = [], [], []
 
     for f in files:
         cohort = os.path.splitext(os.path.basename(f))[0]
         with open(f, newline="", encoding="utf-8-sig", errors="replace") as fh:
             r = csv.DictReader(fh)
-            if header is None:
-                header = list(r.fieldnames)
-            elif list(r.fieldnames) != header:
-                drift.append(cohort)
-                continue
             n = 0
             for row in r:
                 row[COHORT_COL] = cohort
+                for c in DROP_FROM_PUBLIC:
+                    row.pop(c, None)
                 rows.append(row)
                 n += 1
+        if n == 0:
+            # An empty cohort file is a collection gap, not a dataset member.
+            # Shipping it makes the cohort count overstate coverage.
+            empty.append(cohort)
+            continue
         cohorts.append({"cohort": cohort, "rows": n})
         # per-cohort file, with the cohort column added so the two views match
-        out_cols = header + [COHORT_COL]
+        out_cols = [c for c in header if c not in DROP_FROM_PUBLIC] + [COHORT_COL]
         with open(os.path.join(a.out, "by_cohort", cohort + ".csv"), "w",
                   newline="", encoding="utf-8") as fh:
             w = csv.DictWriter(fh, fieldnames=out_cols)
@@ -60,14 +96,11 @@ def main() -> int:
             with open(f, newline="", encoding="utf-8-sig", errors="replace") as src:
                 for row in csv.DictReader(src):
                     row[COHORT_COL] = cohort
+                    for c in DROP_FROM_PUBLIC:
+                        row.pop(c, None)
                     w.writerow(row)
 
-    if drift:
-        print(f"REFUSING: {len(drift)} file(s) have a different schema: {drift}",
-              file=sys.stderr)
-        return 1
-
-    out_cols = header + [COHORT_COL]
+    out_cols = [c for c in header if c not in DROP_FROM_PUBLIC] + [COHORT_COL]
     consolidated = os.path.join(a.out, "spirits_inventory.csv")
     with open(consolidated, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=out_cols)
@@ -81,12 +114,14 @@ def main() -> int:
         "cohorts": len(cohorts),
         "columns": out_cols,
         "excluded_qa_files": sorted(EXCLUDE),
+        "columns_withheld_from_public_release": sorted(DROP_FROM_PUBLIC),
+        "empty_cohorts_dropped": sorted(empty),
         "sha256_spirits_inventory_csv": digest,
         "by_cohort": cohorts,
     }
     json.dump(manifest, open(os.path.join(a.out, "manifest.json"), "w"), indent=2)
 
-    print(f"  cohorts   {len(cohorts)}")
+    print(f"  cohorts   {len(cohorts)}" + (f"  ({len(empty)} empty dropped: {', '.join(empty)})" if empty else ""))
     print(f"  rows      {len(rows):,}")
     print(f"  columns   {len(out_cols)}")
     print(f"  sha256    {digest[:16]}…")

@@ -1,7 +1,7 @@
 {
   "built": "2026-09-22",
   "rows": 10860,
-  "cohorts": 290,
+  "cohorts": 288,
   "columns": [
     "spirit_type",
     "distillery",
@@ -20,7 +20,6 @@
     "mash_bill",
     "barrel_type",
     "cask_finish",
-    "tasting_notes",
     "source_urls",
     "last_verified",
     "label_image_url",
@@ -30,7 +29,14 @@
     "bourbon_ndp_audit",
     "bourbon_template_audit"
   ],
-  "sha256_spirits_inventory_csv": "07cab76d587bb929ec691a528c1c2817e3bfd241968ea30b27b79eb4d291d9bc",
+  "columns_withheld_from_public_release": [
+    "tasting_notes"
+  ],
+  "empty_cohorts_dropped": [
+    "anise_spirits_iraq",
+    "rum_ndps_bottlers"
+  ],
+  "sha256_spirits_inventory_csv": "d0e037a50164fcb4751cb4e5881f3404f80767ec495b542fdd2fe1ba85f6ce42",
   "by_cohort": [
     {
       "cohort": "american_single_malt_california",
@@ -87,10 +93,6 @@
     {
       "cohort": "anise_spirits_greece",
       "rows": 35
-    },
-    {
-      "cohort": "anise_spirits_iraq",
-      "rows": 0
     },
     {
       "cohort": "anise_spirits_israel",
@@ -771,10 +773,6 @@
     {
       "cohort": "rum_multi_origin",
       "rows": 26
-    },
-    {
-      "cohort": "rum_ndps_bottlers",
-      "rows": 0
     },
     {
       "cohort": "rum_nicaragua",

@@ -3,7 +3,7 @@
 A structured, openly licensed reference dataset of spirits by type and country,
 compiled from producer and retailer sources on the public web.
 
-**10,860 expressions · 1,748 distilleries · 21 spirit types · 290 cohorts**
+**10,860 expressions · 1,748 distilleries · 21 spirit types · 288 cohorts**
 
 Every row carries where it came from and when it was last checked. That is the
 part that matters: `source_urls` and `last_verified` are populated on 100% of
@@ -14,7 +14,7 @@ rows, so any entry can be traced back and re-verified rather than taken on trust
 | File | What it is |
 |---|---|
 | [`data/spirits_inventory.csv`](data/spirits_inventory.csv) | everything in one file, 10,860 rows. Start here. |
-| [`data/by_cohort/`](data/by_cohort) | the same rows split into 290 files by spirit type and region |
+| [`data/by_cohort/`](data/by_cohort) | the same rows split into 288 files by spirit type and region |
 | [`data/manifest.json`](data/manifest.json) | build date, row counts per cohort, SHA-256 of the consolidated file |
 
 Both views are generated from one source by `scripts/package.py`, so they cannot
@@ -27,32 +27,31 @@ citation points at data that does not move under you.
 
 ## Schema
 
-10,860 rows, 22 columns.
+10,860 rows, 21 columns.
 
 | Column | Notes |
 |---|---|
-| `spirit_type` | Category name, e.g. `Bourbon`, `Scotch`, `Armagnac`. |
-| `distillery` | Legal or branded distillery name, suffixes stripped. |
-| `distillery_location` | Where it was actually distilled, `City, State` or `City, Country`. Not corporate HQ. |
+| `spirit_type` | Category name, one of 21 fixed values, e.g. `Bourbon`, `Scotch`, `Armagnac`. |
+| `distillery` | The distillery that made the liquid, suffixes stripped. On third-party releases this is the **source** distillery, not the brand; `Undisclosed (<region>)` where the producer does not name it. |
+| `distillery_location` | Where it was distilled, `City, State` or `City, Country`. Not corporate HQ. |
 | `spirit_name` | Brand line only, e.g. `Elijah Craig`. |
-| `producer_type` | Origin of the liquid: `own_make`, `sourced`, `blended`, `unknown`. |
-| `producer_brand` | The bottler when it differs from the distillery (third-party releases). `NULL` for a distillery's own house brand. |
-| `is_ndp` | Non-distiller producer. Derived: `TRUE` when `producer_brand` is set, `NULL` when `producer_type` is `unknown`. |
-| `is_template` | `TRUE` when the row is an umbrella for a programme with per-bottle variation (single-barrel picks, private selections). Those rows have `proof`, `abv`, `batch_lot` and `vintage` `NULL` by design. |
-| `special_designation` | Named sub-line or expression, e.g. `Barrel Proof`. `NULL` if just the core brand. |
-| `age_statement` | `X Years` if stated, `NAS` if explicitly not age stated, `NULL` if unknown. |
-| `vintage` | Producer-labelled year. Distillation year for vintage Cognac, Armagnac and Calvados. `NULL` for multi-year blends. |
+| `producer_type` | Origin of the liquid: `own_make`, `sourced` (bought from another distillery), `blended` (own plus sourced stock), `unknown`. |
+| `producer_brand` | The brand owner when it differs from the distillery (third-party releases). `NULL` for a distillery's own house brand. |
+| `is_ndp` | Non-distiller producer. Derived: `TRUE` when `producer_brand` is set, `FALSE` when it is not, `NULL` when `producer_type` is `unknown`. |
+| `is_template` | `TRUE` when the row stands for a producer programme with per-bottle variation (single-barrel, private-selection programmes). `proof`, `abv`, `batch_lot` and `vintage` are normally `NULL` on these rows because they vary by bottle. Retailer and store picks are not in the dataset. |
+| `special_designation` | Semicolon-separated: the category's legal class or style (`Kentucky Straight Bourbon`, `Mezcal Artesanal`, `Bas-Armagnac`), then qualifiers (age tier, grape or agave, finish), then any named release. |
+| `age_statement` | `X Years` if stated, `NAS` if the label carries no age statement, `NULL` if unknown. |
+| `vintage` | Year on the label: release year for dated annual releases, distillation year for vintage Cognac, Armagnac, Calvados and single casks. `NULL` for multi-year blends and solera. |
 | `batch_lot` | Producer's batch or release identifier, verbatim. |
 | `proof` | US proof (2 × ABV). |
 | `abv` | Alcohol by volume, one decimal. |
-| `mash_bill` | Grain recipe, percentages summing to 100. **Used for the recipe in every category, not only bourbon-style spirits** — for categories with no traditional mash bill it carries whatever the producer discloses about composition. Descriptors such as `wheated` or `high-rye` only where percentages are not published. |
+| `mash_bill` | What the spirit was made from, in **every** category: grains with percentages where disclosed (`wheated` / `high-rye` where not), agave species, sugarcane base, grape or fruit variety, base material of a gin or vodka. `NULL` if the producer does not disclose it; never inferred from the category's legal definition. |
 | `barrel_type` | Primary maturation cask. |
-| `cask_finish` | Secondary maturation cask, `NULL` if none. |
-| `tasting_notes` | Producer notes where available. Third-party notes are prefixed with their source, e.g. `[Whisky Advocate]`. |
+| `cask_finish` | Secondary maturation cask. `NULL` means none **or** unknown, not confirmed absent. |
 | `source_urls` | Semicolon-separated URLs substantiating the row. Never null. |
-| `last_verified` | ISO date the row was last confirmed against its sources. Never null. |
-| `label_image_url` | Link to a bottle or label image hosted elsewhere, preferring the producer's own page. `NULL` rather than a stock placeholder. |
-| `cohort` | Added at packaging time from the source filename, e.g. `bourbon_kentucky_craft`. |
+| `last_verified` | ISO date the row was last confirmed against its sources. |
+| `label_image_url` | Link to a bottle or label image hosted elsewhere: producer page first, then aggregator, then retailer. `NULL` rather than a stock placeholder. |
+| `cohort` | Spirit type plus region or producer group, e.g. `bourbon_kentucky_craft`. Added at packaging time from the source filename; matches the file name in `data/by_cohort/`. |
 
 `cohort` is added at packaging time. In the working project the grouping lived
 only in the filename, which meant a naive merge would lose the distinction
@@ -65,24 +64,32 @@ Completeness varies by field, and the dataset does not pretend otherwise:
 | Field | Populated |
 |---|---|
 | `source_urls` | 100.0% |
-| `last_verified` | 100.0% |
+| `last_verified` | 99.98% |
 | `abv` | 78.6% |
 | `proof` | 77.7% |
 | `age_statement` | 58.9% |
-| `tasting_notes` | 52.9% |
 | `label_image_url` | 47.3% |
 | `mash_bill` | 38.5% |
 
 A blank is a blank. Where a value could not be sourced it is empty or `NULL`
-rather than inferred, and rows flagged `is_template` carry deliberate nulls in
-`proof`, `abv`, `batch_lot` and `vintage` because those vary bottle to bottle.
+rather than inferred. Rows flagged `is_template` normally carry nulls in
+`proof`, `abv`, `batch_lot` and `vintage` because those vary bottle to bottle,
+though a small number are populated where a programme defines them.
 
-## Provenance, and a word on tasting notes
+## Provenance, and why there are no tasting notes
 
-`tasting_notes` entries tagged `[brand]` are derived from producer-published
-descriptions and are attributed as such in the field itself. Factual attributes
-(distillery, proof, ABV, mash bill, age statement) are not subject to copyright.
-`label_image_url` is a reference to an image hosted elsewhere; no images are
+Everything published here is factual: distillery, location, strength, recipe,
+cask, age, and where each of those came from. Facts are not subject to
+copyright, so this release can be licensed openly without qualification.
+
+**Tasting notes are deliberately withheld.** The working dataset holds 5,744 of
+them, and an audit before first publication found that 96% carried no source tag
+and several hundred were full prose, including producer marketing copy reproduced
+verbatim. CC BY 4.0 grants you the right to copy, adapt and commercialise this
+dataset, and that right cannot honestly be granted over text we do not own. The
+column returns once those notes have been rewritten as original descriptors.
+
+`label_image_url` is a reference to an image hosted elsewhere. No images are
 redistributed here.
 
 ## This will contain errors
