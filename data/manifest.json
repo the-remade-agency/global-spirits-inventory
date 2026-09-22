@@ -1,0 +1,1196 @@
+{
+  "built": "2026-09-22",
+  "rows": 10860,
+  "cohorts": 290,
+  "columns": [
+    "spirit_type",
+    "distillery",
+    "distillery_location",
+    "spirit_name",
+    "producer_type",
+    "producer_brand",
+    "is_ndp",
+    "is_template",
+    "special_designation",
+    "age_statement",
+    "vintage",
+    "batch_lot",
+    "proof",
+    "abv",
+    "mash_bill",
+    "barrel_type",
+    "cask_finish",
+    "tasting_notes",
+    "source_urls",
+    "last_verified",
+    "label_image_url",
+    "cohort"
+  ],
+  "excluded_qa_files": [
+    "bourbon_ndp_audit",
+    "bourbon_template_audit"
+  ],
+  "sha256_spirits_inventory_csv": "07cab76d587bb929ec691a528c1c2817e3bfd241968ea30b27b79eb4d291d9bc",
+  "by_cohort": [
+    {
+      "cohort": "american_single_malt_california",
+      "rows": 23
+    },
+    {
+      "cohort": "american_single_malt_northeast_mid_atlantic",
+      "rows": 73
+    },
+    {
+      "cohort": "american_single_malt_pacific_northwest",
+      "rows": 68
+    },
+    {
+      "cohort": "american_single_malt_southeast_midwest_other",
+      "rows": 59
+    },
+    {
+      "cohort": "american_single_malt_texas",
+      "rows": 13
+    },
+    {
+      "cohort": "american_whiskey_indiana",
+      "rows": 26
+    },
+    {
+      "cohort": "american_whiskey_kentucky",
+      "rows": 34
+    },
+    {
+      "cohort": "american_whiskey_ndps_bottlers",
+      "rows": 25
+    },
+    {
+      "cohort": "american_whiskey_northeast_mid_atlantic",
+      "rows": 19
+    },
+    {
+      "cohort": "american_whiskey_other_states",
+      "rows": 54
+    },
+    {
+      "cohort": "anise_spirits_bulgaria",
+      "rows": 6
+    },
+    {
+      "cohort": "anise_spirits_cyprus",
+      "rows": 1
+    },
+    {
+      "cohort": "anise_spirits_france",
+      "rows": 19
+    },
+    {
+      "cohort": "anise_spirits_greece",
+      "rows": 35
+    },
+    {
+      "cohort": "anise_spirits_iraq",
+      "rows": 0
+    },
+    {
+      "cohort": "anise_spirits_israel",
+      "rows": 9
+    },
+    {
+      "cohort": "anise_spirits_italy",
+      "rows": 4
+    },
+    {
+      "cohort": "anise_spirits_jordan",
+      "rows": 3
+    },
+    {
+      "cohort": "anise_spirits_lebanon",
+      "rows": 28
+    },
+    {
+      "cohort": "anise_spirits_north_macedonia",
+      "rows": 1
+    },
+    {
+      "cohort": "anise_spirits_spain",
+      "rows": 11
+    },
+    {
+      "cohort": "anise_spirits_syria",
+      "rows": 2
+    },
+    {
+      "cohort": "anise_spirits_turkey",
+      "rows": 16
+    },
+    {
+      "cohort": "armagnac_france",
+      "rows": 912
+    },
+    {
+      "cohort": "bourbon_indiana",
+      "rows": 99
+    },
+    {
+      "cohort": "bourbon_kentucky_craft",
+      "rows": 245
+    },
+    {
+      "cohort": "bourbon_kentucky_majors",
+      "rows": 462
+    },
+    {
+      "cohort": "bourbon_ndps_bottlers",
+      "rows": 97
+    },
+    {
+      "cohort": "bourbon_other_states",
+      "rows": 152
+    },
+    {
+      "cohort": "bourbon_tennessee_bourbon",
+      "rows": 63
+    },
+    {
+      "cohort": "brandy_armenia",
+      "rows": 35
+    },
+    {
+      "cohort": "brandy_australia",
+      "rows": 8
+    },
+    {
+      "cohort": "brandy_austria",
+      "rows": 19
+    },
+    {
+      "cohort": "brandy_brazil",
+      "rows": 1
+    },
+    {
+      "cohort": "brandy_bulgaria",
+      "rows": 6
+    },
+    {
+      "cohort": "brandy_canada",
+      "rows": 6
+    },
+    {
+      "cohort": "brandy_chile",
+      "rows": 21
+    },
+    {
+      "cohort": "brandy_china",
+      "rows": 3
+    },
+    {
+      "cohort": "brandy_croatia",
+      "rows": 9
+    },
+    {
+      "cohort": "brandy_czech_republic",
+      "rows": 9
+    },
+    {
+      "cohort": "brandy_france",
+      "rows": 22
+    },
+    {
+      "cohort": "brandy_georgia",
+      "rows": 39
+    },
+    {
+      "cohort": "brandy_germany",
+      "rows": 12
+    },
+    {
+      "cohort": "brandy_greece",
+      "rows": 10
+    },
+    {
+      "cohort": "brandy_hungary",
+      "rows": 6
+    },
+    {
+      "cohort": "brandy_india",
+      "rows": 15
+    },
+    {
+      "cohort": "brandy_ireland",
+      "rows": 1
+    },
+    {
+      "cohort": "brandy_israel",
+      "rows": 3
+    },
+    {
+      "cohort": "brandy_italy",
+      "rows": 52
+    },
+    {
+      "cohort": "brandy_japan",
+      "rows": 6
+    },
+    {
+      "cohort": "brandy_lebanon",
+      "rows": 2
+    },
+    {
+      "cohort": "brandy_mexico",
+      "rows": 6
+    },
+    {
+      "cohort": "brandy_new_zealand",
+      "rows": 1
+    },
+    {
+      "cohort": "brandy_peru",
+      "rows": 39
+    },
+    {
+      "cohort": "brandy_portugal",
+      "rows": 3
+    },
+    {
+      "cohort": "brandy_romania",
+      "rows": 7
+    },
+    {
+      "cohort": "brandy_russia",
+      "rows": 7
+    },
+    {
+      "cohort": "brandy_serbia",
+      "rows": 11
+    },
+    {
+      "cohort": "brandy_south_africa",
+      "rows": 33
+    },
+    {
+      "cohort": "brandy_spain",
+      "rows": 37
+    },
+    {
+      "cohort": "brandy_ukraine",
+      "rows": 11
+    },
+    {
+      "cohort": "brandy_united_kingdom",
+      "rows": 6
+    },
+    {
+      "cohort": "brandy_united_states",
+      "rows": 62
+    },
+    {
+      "cohort": "calvados_france",
+      "rows": 253
+    },
+    {
+      "cohort": "cognac_france",
+      "rows": 529
+    },
+    {
+      "cohort": "gin_australia",
+      "rows": 25
+    },
+    {
+      "cohort": "gin_austria",
+      "rows": 1
+    },
+    {
+      "cohort": "gin_belgium",
+      "rows": 5
+    },
+    {
+      "cohort": "gin_brazil",
+      "rows": 6
+    },
+    {
+      "cohort": "gin_canada",
+      "rows": 15
+    },
+    {
+      "cohort": "gin_china",
+      "rows": 1
+    },
+    {
+      "cohort": "gin_finland",
+      "rows": 2
+    },
+    {
+      "cohort": "gin_france",
+      "rows": 8
+    },
+    {
+      "cohort": "gin_germany",
+      "rows": 8
+    },
+    {
+      "cohort": "gin_guyana",
+      "rows": 1
+    },
+    {
+      "cohort": "gin_iceland",
+      "rows": 1
+    },
+    {
+      "cohort": "gin_india",
+      "rows": 11
+    },
+    {
+      "cohort": "gin_ireland",
+      "rows": 26
+    },
+    {
+      "cohort": "gin_israel",
+      "rows": 4
+    },
+    {
+      "cohort": "gin_italy",
+      "rows": 6
+    },
+    {
+      "cohort": "gin_jamaica",
+      "rows": 1
+    },
+    {
+      "cohort": "gin_japan",
+      "rows": 19
+    },
+    {
+      "cohort": "gin_kenya",
+      "rows": 3
+    },
+    {
+      "cohort": "gin_lithuania",
+      "rows": 1
+    },
+    {
+      "cohort": "gin_mexico",
+      "rows": 4
+    },
+    {
+      "cohort": "gin_netherlands",
+      "rows": 13
+    },
+    {
+      "cohort": "gin_new_zealand",
+      "rows": 8
+    },
+    {
+      "cohort": "gin_norway",
+      "rows": 1
+    },
+    {
+      "cohort": "gin_peru",
+      "rows": 1
+    },
+    {
+      "cohort": "gin_philippines",
+      "rows": 2
+    },
+    {
+      "cohort": "gin_singapore",
+      "rows": 6
+    },
+    {
+      "cohort": "gin_south_africa",
+      "rows": 12
+    },
+    {
+      "cohort": "gin_spain",
+      "rows": 8
+    },
+    {
+      "cohort": "gin_sweden",
+      "rows": 4
+    },
+    {
+      "cohort": "gin_thailand",
+      "rows": 2
+    },
+    {
+      "cohort": "gin_united_kingdom",
+      "rows": 184
+    },
+    {
+      "cohort": "gin_united_states",
+      "rows": 73
+    },
+    {
+      "cohort": "irish_whiskey_established",
+      "rows": 106
+    },
+    {
+      "cohort": "irish_whiskey_midleton",
+      "rows": 142
+    },
+    {
+      "cohort": "irish_whiskey_ndps_bottlers",
+      "rows": 136
+    },
+    {
+      "cohort": "irish_whiskey_new_craft",
+      "rows": 220
+    },
+    {
+      "cohort": "japanese_whisky_legacy_closed_ndps",
+      "rows": 561
+    },
+    {
+      "cohort": "japanese_whisky_nikka",
+      "rows": 34
+    },
+    {
+      "cohort": "japanese_whisky_other_new_craft",
+      "rows": 100
+    },
+    {
+      "cohort": "japanese_whisky_suntory",
+      "rows": 101
+    },
+    {
+      "cohort": "liqueur_argentina",
+      "rows": 2
+    },
+    {
+      "cohort": "liqueur_armenia",
+      "rows": 4
+    },
+    {
+      "cohort": "liqueur_australia",
+      "rows": 24
+    },
+    {
+      "cohort": "liqueur_austria",
+      "rows": 1
+    },
+    {
+      "cohort": "liqueur_barbados",
+      "rows": 2
+    },
+    {
+      "cohort": "liqueur_belgium",
+      "rows": 4
+    },
+    {
+      "cohort": "liqueur_brazil",
+      "rows": 3
+    },
+    {
+      "cohort": "liqueur_canada",
+      "rows": 18
+    },
+    {
+      "cohort": "liqueur_china",
+      "rows": 5
+    },
+    {
+      "cohort": "liqueur_croatia",
+      "rows": 3
+    },
+    {
+      "cohort": "liqueur_cuba",
+      "rows": 4
+    },
+    {
+      "cohort": "liqueur_czech_republic",
+      "rows": 5
+    },
+    {
+      "cohort": "liqueur_denmark",
+      "rows": 11
+    },
+    {
+      "cohort": "liqueur_finland",
+      "rows": 3
+    },
+    {
+      "cohort": "liqueur_france",
+      "rows": 167
+    },
+    {
+      "cohort": "liqueur_germany",
+      "rows": 33
+    },
+    {
+      "cohort": "liqueur_greece",
+      "rows": 7
+    },
+    {
+      "cohort": "liqueur_grenada",
+      "rows": 2
+    },
+    {
+      "cohort": "liqueur_guyana",
+      "rows": 3
+    },
+    {
+      "cohort": "liqueur_haiti",
+      "rows": 1
+    },
+    {
+      "cohort": "liqueur_hungary",
+      "rows": 6
+    },
+    {
+      "cohort": "liqueur_india",
+      "rows": 1
+    },
+    {
+      "cohort": "liqueur_ireland",
+      "rows": 19
+    },
+    {
+      "cohort": "liqueur_israel",
+      "rows": 2
+    },
+    {
+      "cohort": "liqueur_italy",
+      "rows": 132
+    },
+    {
+      "cohort": "liqueur_jamaica",
+      "rows": 5
+    },
+    {
+      "cohort": "liqueur_japan",
+      "rows": 24
+    },
+    {
+      "cohort": "liqueur_korea",
+      "rows": 4
+    },
+    {
+      "cohort": "liqueur_latvia",
+      "rows": 5
+    },
+    {
+      "cohort": "liqueur_madagascar",
+      "rows": 1
+    },
+    {
+      "cohort": "liqueur_martinique",
+      "rows": 2
+    },
+    {
+      "cohort": "liqueur_mauritius",
+      "rows": 3
+    },
+    {
+      "cohort": "liqueur_mexico",
+      "rows": 32
+    },
+    {
+      "cohort": "liqueur_multi_origin",
+      "rows": 2
+    },
+    {
+      "cohort": "liqueur_netherlands",
+      "rows": 33
+    },
+    {
+      "cohort": "liqueur_new_zealand",
+      "rows": 4
+    },
+    {
+      "cohort": "liqueur_panama",
+      "rows": 4
+    },
+    {
+      "cohort": "liqueur_peru",
+      "rows": 1
+    },
+    {
+      "cohort": "liqueur_poland",
+      "rows": 13
+    },
+    {
+      "cohort": "liqueur_puerto_rico",
+      "rows": 5
+    },
+    {
+      "cohort": "liqueur_reunion",
+      "rows": 2
+    },
+    {
+      "cohort": "liqueur_saint_lucia",
+      "rows": 5
+    },
+    {
+      "cohort": "liqueur_south_africa",
+      "rows": 10
+    },
+    {
+      "cohort": "liqueur_spain",
+      "rows": 5
+    },
+    {
+      "cohort": "liqueur_sweden",
+      "rows": 2
+    },
+    {
+      "cohort": "liqueur_thailand",
+      "rows": 1
+    },
+    {
+      "cohort": "liqueur_trinidad",
+      "rows": 1
+    },
+    {
+      "cohort": "liqueur_united_kingdom",
+      "rows": 25
+    },
+    {
+      "cohort": "liqueur_united_states",
+      "rows": 81
+    },
+    {
+      "cohort": "liqueur_us_virgin_islands",
+      "rows": 2
+    },
+    {
+      "cohort": "liqueur_venezuela",
+      "rows": 2
+    },
+    {
+      "cohort": "liqueur_vietnam",
+      "rows": 5
+    },
+    {
+      "cohort": "mezcal_mexico",
+      "rows": 361
+    },
+    {
+      "cohort": "rum_antigua",
+      "rows": 24
+    },
+    {
+      "cohort": "rum_australia",
+      "rows": 32
+    },
+    {
+      "cohort": "rum_barbados",
+      "rows": 77
+    },
+    {
+      "cohort": "rum_belize",
+      "rows": 14
+    },
+    {
+      "cohort": "rum_brazil",
+      "rows": 15
+    },
+    {
+      "cohort": "rum_colombia",
+      "rows": 8
+    },
+    {
+      "cohort": "rum_costa_rica",
+      "rows": 6
+    },
+    {
+      "cohort": "rum_cuba",
+      "rows": 40
+    },
+    {
+      "cohort": "rum_dominica",
+      "rows": 4
+    },
+    {
+      "cohort": "rum_dominican_republic",
+      "rows": 22
+    },
+    {
+      "cohort": "rum_fiji",
+      "rows": 7
+    },
+    {
+      "cohort": "rum_grenada",
+      "rows": 17
+    },
+    {
+      "cohort": "rum_guadeloupe",
+      "rows": 51
+    },
+    {
+      "cohort": "rum_guatemala",
+      "rows": 9
+    },
+    {
+      "cohort": "rum_guyana",
+      "rows": 39
+    },
+    {
+      "cohort": "rum_haiti",
+      "rows": 10
+    },
+    {
+      "cohort": "rum_india",
+      "rows": 13
+    },
+    {
+      "cohort": "rum_indonesia",
+      "rows": 2
+    },
+    {
+      "cohort": "rum_jamaica",
+      "rows": 97
+    },
+    {
+      "cohort": "rum_japan",
+      "rows": 6
+    },
+    {
+      "cohort": "rum_legacy_closed",
+      "rows": 38
+    },
+    {
+      "cohort": "rum_madagascar",
+      "rows": 5
+    },
+    {
+      "cohort": "rum_martinique",
+      "rows": 65
+    },
+    {
+      "cohort": "rum_mauritius",
+      "rows": 20
+    },
+    {
+      "cohort": "rum_mexico",
+      "rows": 7
+    },
+    {
+      "cohort": "rum_mozambique",
+      "rows": 1
+    },
+    {
+      "cohort": "rum_multi_origin",
+      "rows": 26
+    },
+    {
+      "cohort": "rum_ndps_bottlers",
+      "rows": 0
+    },
+    {
+      "cohort": "rum_nicaragua",
+      "rows": 7
+    },
+    {
+      "cohort": "rum_panama",
+      "rows": 26
+    },
+    {
+      "cohort": "rum_paraguay",
+      "rows": 5
+    },
+    {
+      "cohort": "rum_peru",
+      "rows": 5
+    },
+    {
+      "cohort": "rum_philippines",
+      "rows": 10
+    },
+    {
+      "cohort": "rum_puerto_rico",
+      "rows": 25
+    },
+    {
+      "cohort": "rum_reunion",
+      "rows": 20
+    },
+    {
+      "cohort": "rum_saint_lucia",
+      "rows": 24
+    },
+    {
+      "cohort": "rum_saint_vincent",
+      "rows": 7
+    },
+    {
+      "cohort": "rum_south_africa",
+      "rows": 2
+    },
+    {
+      "cohort": "rum_thailand",
+      "rows": 1
+    },
+    {
+      "cohort": "rum_trinidad",
+      "rows": 13
+    },
+    {
+      "cohort": "rum_united_kingdom",
+      "rows": 23
+    },
+    {
+      "cohort": "rum_united_states",
+      "rows": 62
+    },
+    {
+      "cohort": "rum_us_virgin_islands",
+      "rows": 15
+    },
+    {
+      "cohort": "rum_venezuela",
+      "rows": 19
+    },
+    {
+      "cohort": "rye_indiana",
+      "rows": 63
+    },
+    {
+      "cohort": "rye_kentucky",
+      "rows": 57
+    },
+    {
+      "cohort": "rye_ndps_bottlers",
+      "rows": 9
+    },
+    {
+      "cohort": "rye_northeast_mid_atlantic",
+      "rows": 58
+    },
+    {
+      "cohort": "rye_other_states",
+      "rows": 87
+    },
+    {
+      "cohort": "rye_tennessee",
+      "rows": 10
+    },
+    {
+      "cohort": "scotch_blends",
+      "rows": 162
+    },
+    {
+      "cohort": "scotch_campbeltown",
+      "rows": 69
+    },
+    {
+      "cohort": "scotch_highlands",
+      "rows": 281
+    },
+    {
+      "cohort": "scotch_independent_bottlers",
+      "rows": 107
+    },
+    {
+      "cohort": "scotch_islay",
+      "rows": 178
+    },
+    {
+      "cohort": "scotch_legacy_closed",
+      "rows": 54
+    },
+    {
+      "cohort": "scotch_lowlands",
+      "rows": 90
+    },
+    {
+      "cohort": "scotch_speyside",
+      "rows": 279
+    },
+    {
+      "cohort": "tennessee_whiskey",
+      "rows": 58
+    },
+    {
+      "cohort": "tequila_mexico",
+      "rows": 424
+    },
+    {
+      "cohort": "vermouth_argentina",
+      "rows": 4
+    },
+    {
+      "cohort": "vermouth_australia",
+      "rows": 8
+    },
+    {
+      "cohort": "vermouth_france",
+      "rows": 17
+    },
+    {
+      "cohort": "vermouth_germany",
+      "rows": 4
+    },
+    {
+      "cohort": "vermouth_italy",
+      "rows": 56
+    },
+    {
+      "cohort": "vermouth_spain",
+      "rows": 30
+    },
+    {
+      "cohort": "vermouth_united_kingdom",
+      "rows": 5
+    },
+    {
+      "cohort": "vermouth_united_states",
+      "rows": 10
+    },
+    {
+      "cohort": "vodka_australia",
+      "rows": 4
+    },
+    {
+      "cohort": "vodka_austria",
+      "rows": 3
+    },
+    {
+      "cohort": "vodka_belarus",
+      "rows": 35
+    },
+    {
+      "cohort": "vodka_belgium",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_bulgaria",
+      "rows": 4
+    },
+    {
+      "cohort": "vodka_canada",
+      "rows": 14
+    },
+    {
+      "cohort": "vodka_czech_republic",
+      "rows": 7
+    },
+    {
+      "cohort": "vodka_denmark",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_estonia",
+      "rows": 13
+    },
+    {
+      "cohort": "vodka_finland",
+      "rows": 12
+    },
+    {
+      "cohort": "vodka_france",
+      "rows": 18
+    },
+    {
+      "cohort": "vodka_germany",
+      "rows": 2
+    },
+    {
+      "cohort": "vodka_guyana",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_hungary",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_iceland",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_india",
+      "rows": 21
+    },
+    {
+      "cohort": "vodka_ireland",
+      "rows": 2
+    },
+    {
+      "cohort": "vodka_israel",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_italy",
+      "rows": 2
+    },
+    {
+      "cohort": "vodka_jamaica",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_japan",
+      "rows": 5
+    },
+    {
+      "cohort": "vodka_latvia",
+      "rows": 18
+    },
+    {
+      "cohort": "vodka_lithuania",
+      "rows": 8
+    },
+    {
+      "cohort": "vodka_mexico",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_moldova",
+      "rows": 3
+    },
+    {
+      "cohort": "vodka_netherlands",
+      "rows": 11
+    },
+    {
+      "cohort": "vodka_new_zealand",
+      "rows": 8
+    },
+    {
+      "cohort": "vodka_norway",
+      "rows": 2
+    },
+    {
+      "cohort": "vodka_philippines",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_poland",
+      "rows": 39
+    },
+    {
+      "cohort": "vodka_romania",
+      "rows": 4
+    },
+    {
+      "cohort": "vodka_russia",
+      "rows": 19
+    },
+    {
+      "cohort": "vodka_serbia",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_slovakia",
+      "rows": 6
+    },
+    {
+      "cohort": "vodka_south_africa",
+      "rows": 4
+    },
+    {
+      "cohort": "vodka_sweden",
+      "rows": 23
+    },
+    {
+      "cohort": "vodka_thailand",
+      "rows": 1
+    },
+    {
+      "cohort": "vodka_ukraine",
+      "rows": 24
+    },
+    {
+      "cohort": "vodka_united_kingdom",
+      "rows": 17
+    },
+    {
+      "cohort": "vodka_united_states",
+      "rows": 43
+    },
+    {
+      "cohort": "world_whiskey_australia",
+      "rows": 78
+    },
+    {
+      "cohort": "world_whiskey_austria",
+      "rows": 7
+    },
+    {
+      "cohort": "world_whiskey_belgium",
+      "rows": 7
+    },
+    {
+      "cohort": "world_whiskey_brazil",
+      "rows": 8
+    },
+    {
+      "cohort": "world_whiskey_canada",
+      "rows": 125
+    },
+    {
+      "cohort": "world_whiskey_china",
+      "rows": 2
+    },
+    {
+      "cohort": "world_whiskey_denmark",
+      "rows": 7
+    },
+    {
+      "cohort": "world_whiskey_england",
+      "rows": 62
+    },
+    {
+      "cohort": "world_whiskey_finland",
+      "rows": 10
+    },
+    {
+      "cohort": "world_whiskey_france",
+      "rows": 24
+    },
+    {
+      "cohort": "world_whiskey_germany",
+      "rows": 23
+    },
+    {
+      "cohort": "world_whiskey_iceland",
+      "rows": 4
+    },
+    {
+      "cohort": "world_whiskey_india",
+      "rows": 94
+    },
+    {
+      "cohort": "world_whiskey_israel",
+      "rows": 19
+    },
+    {
+      "cohort": "world_whiskey_japan",
+      "rows": 47
+    },
+    {
+      "cohort": "world_whiskey_netherlands",
+      "rows": 5
+    },
+    {
+      "cohort": "world_whiskey_new_zealand",
+      "rows": 9
+    },
+    {
+      "cohort": "world_whiskey_norway",
+      "rows": 4
+    },
+    {
+      "cohort": "world_whiskey_south_africa",
+      "rows": 12
+    },
+    {
+      "cohort": "world_whiskey_spain",
+      "rows": 4
+    },
+    {
+      "cohort": "world_whiskey_sweden",
+      "rows": 15
+    },
+    {
+      "cohort": "world_whiskey_switzerland",
+      "rows": 3
+    },
+    {
+      "cohort": "world_whiskey_taiwan",
+      "rows": 33
+    },
+    {
+      "cohort": "world_whiskey_wales",
+      "rows": 24
+    }
+  ]
+}

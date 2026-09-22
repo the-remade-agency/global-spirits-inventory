@@ -1,0 +1,2 @@
+spirit_type,distillery,distillery_location,spirit_name,producer_type,producer_brand,is_ndp,is_template,special_designation,age_statement,vintage,batch_lot,proof,abv,mash_bill,barrel_type,cask_finish,tasting_notes,source_urls,last_verified,label_image_url,cohort
+Vodka,Aalborg Distillery,"Aalborg, Denmark",Frïs,own_make,,FALSE,FALSE,Vodka; ; Frïs,,,,80.0,40,Wheat,,,Danish freeze-distilled wheat vodka (Sazerac brand).,https://www.diffordsguide.com/producers/138/danish-distillers-aalborg; https://theliquorbarn.com/products/fris-vodka-1-75l,2026-06-11,,vodka_denmark

@@ -1,0 +1,2 @@
+spirit_type,distillery,distillery_location,spirit_name,producer_type,producer_brand,is_ndp,is_template,special_designation,age_statement,vintage,batch_lot,proof,abv,mash_bill,barrel_type,cask_finish,tasting_notes,source_urls,last_verified,label_image_url,cohort
+Liqueur,London to Lima,"Lima, Peru",London to Lima Gin Liqueur,own_make,NULL,FALSE,FALSE,Fruit Liqueur; Gin Base,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,https://gin-mag.com/2020/01/24/london-to-lima-distillery-peru-releases-gin-liqueur/; _cross_category_capture.md (Gin Sub 3),2026-06-28,NULL,liqueur_peru

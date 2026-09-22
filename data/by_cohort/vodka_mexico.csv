@@ -1,0 +1,2 @@
+spirit_type,distillery,distillery_location,spirit_name,producer_type,producer_brand,is_ndp,is_template,special_designation,age_statement,vintage,batch_lot,proof,abv,mash_bill,barrel_type,cask_finish,tasting_notes,source_urls,last_verified,label_image_url,cohort
+Vodka,Globefill Inc. (Crystal Head),Mexico,Crystal Head,own_make,NULL,FALSE,FALSE,Vodka; Agave; Onyx,NULL,NULL,NULL,80,40.0,Blue Weber agave (single farm),NULL,NULL,NULL,https://www.crystalheadvodka.com/,2026-06-12,NULL,vodka_mexico

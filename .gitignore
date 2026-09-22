@@ -1,0 +1,12 @@
+# Nothing from the working research project belongs here except data/ built by
+# scripts/package.py. These patterns exist so a stray copy cannot be committed.
+_scratch/
+_backups/
+_image_cache/
+_outputs_backup_*/
+*.bak
+.DS_Store
+.env
+.env.*
+*.key
+*.pem

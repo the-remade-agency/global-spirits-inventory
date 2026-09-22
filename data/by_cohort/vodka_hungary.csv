@@ -1,0 +1,2 @@
+spirit_type,distillery,distillery_location,spirit_name,producer_type,producer_brand,is_ndp,is_template,special_designation,age_statement,vintage,batch_lot,proof,abv,mash_bill,barrel_type,cask_finish,tasting_notes,source_urls,last_verified,label_image_url,cohort
+Vodka,Zwack Unicum,"Budapest, Hungary",Kalinka Vodka,own_make,,FALSE,FALSE,"Vodka; Grain, Charcoal Filtered; Kalinka",NAS,,,75.0,37.5,Grain,,,,https://zwackunicum.hu/en/portfolio/kalinka/; https://www.zwackwebshop.hu/en/Kalinka-brand; https://iwsc.net/results/detail/151538/kalinka-vodka,2026-06-11,,vodka_hungary
