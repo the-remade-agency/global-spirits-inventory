@@ -119,6 +119,7 @@ def main() -> int:
     digest = hashlib.sha256(open(consolidated, "rb").read()).hexdigest()
     n_raw, n_norm = distillery_counts(rows)
     n_types = len({r["spirit_type"].strip() for r in rows if r.get("spirit_type", "").strip()})
+    n_sourced = sum(1 for r in rows if (r.get("source_urls") or "").strip())
     manifest = {
         "built": date.today().isoformat(),
         "rows": len(rows),
@@ -126,6 +127,7 @@ def main() -> int:
         "distillery_strings": n_raw,
         "distilleries": n_norm,
         "spirit_types": n_types,
+        "rows_with_source_pct": round(100.0 * n_sourced / len(rows), 1) if rows else 0.0,
         "columns": out_cols,
         "excluded_qa_files": sorted(EXCLUDE),
         "columns_withheld_from_public_release": sorted(DROP_FROM_PUBLIC),
