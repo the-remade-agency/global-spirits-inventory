@@ -2,7 +2,7 @@
 
 Things this dataset does not yet do well, named rather than rounded away.
 
-Current as of the 2026-09-22 build: 10,743 rows, 1,743 distilleries,
+Current as of the 2026-09-22 build: 10,743 rows, 1,734 distilleries,
 288 cohorts.
 
 ## Rows whose source is a homepage, not a page
@@ -63,6 +63,28 @@ live in `_outputs/_held/` in the working project and are not published. A held
 row returns when a page-level source is found for it.
 
 ## Known data faults
+
+**Ten distilleries appear under two spellings.** The `distillery` column holds
+1,744 distinct strings, of which ten are capitalisation or punctuation variants
+of another entry. The real count is 1,734, which is the figure quoted above and
+in the README. Anyone grouping on the raw string will get 1,744 and should
+normalise first.
+
+| Spelling | Rows | Also appears as | Rows |
+| --- | ---: | --- | ---: |
+| `KOVAL Distillery` | 5 | `Koval Distillery` | 3 |
+| `La Nina del Mezcal (CRM NOM O170X)` | 1 | `La Nina del Mezcal (CRM NOM-O170X)` | 4 |
+| `Leopold Bros` | 2 | `Leopold Bros.` | 6 |
+| `Los Siete Misterios (CRM NOM O153X)` | 5 | `Los Siete Misterios (CRM NOM-O153X)` | 5 |
+| `Mezcalero (CRM NOM O14X)` | 6 | `Mezcalero (CRM NOM-O14X)` | 21 |
+| `Never Never Distilling Co` | 1 | `Never Never Distilling Co.` | 4 |
+| `Paul Marie & Fils` | 2 | `Paul-Marie & Fils` | 2 |
+| `SAKURAO Distillery` | 8 | `Sakurao Distillery` | 1 |
+| `St George Spirits` | 2 | `St. George Spirits` | 19 |
+| `The Distillery (Phuket)` | 1 | `The Distillery Phuket` | 1 |
+
+No row is wrong; the name is inconsistent between rows. Queued for the October
+pass, where the merge also fixes the NOM formatting on the three mezcal entries.
 
 **Sixteen rows are miscategorised.** The product exists, the row is filed under
 the wrong spirit type: an amaro recorded as vermouth, gins recorded as liqueurs

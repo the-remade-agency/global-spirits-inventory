@@ -3,7 +3,7 @@
 A structured, openly licensed reference dataset of spirits by type and country,
 compiled from producer and retailer sources on the public web.
 
-**10,743 expressions · 1,743 distilleries · 21 spirit types · 288 cohorts**
+**10,743 expressions · 1,734 distilleries · 21 spirit types · 288 cohorts**
 
 Every row carries where it came from and when it was last checked. `source_urls`
 and `last_verified` are populated on 100% of rows.

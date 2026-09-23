@@ -2,6 +2,8 @@
   "built": "2026-09-22",
   "rows": 10743,
   "cohorts": 288,
+  "distillery_strings": 1744,
+  "distilleries": 1734,
   "columns": [
     "spirit_type",
     "distillery",

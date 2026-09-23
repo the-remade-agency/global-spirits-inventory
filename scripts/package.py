@@ -33,6 +33,15 @@ COHORT_COL = "cohort"
 DROP_FROM_PUBLIC = {"tasting_notes"}
 
 
+def distillery_counts(rows):
+    """Distinct distillery strings, and distinct distilleries after normalising
+    case and punctuation. The two differ where one producer is spelled two ways;
+    the normalised figure is the one quoted in the README."""
+    names = {r["distillery"].strip() for r in rows if r.get("distillery", "").strip()}
+    norm = {re.sub(r"[^a-z0-9]", "", n.casefold()) for n in names}
+    return len(names), len(norm)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", required=True)
@@ -108,10 +117,13 @@ def main() -> int:
         w.writerows(rows)
 
     digest = hashlib.sha256(open(consolidated, "rb").read()).hexdigest()
+    n_raw, n_norm = distillery_counts(rows)
     manifest = {
         "built": date.today().isoformat(),
         "rows": len(rows),
         "cohorts": len(cohorts),
+        "distillery_strings": n_raw,
+        "distilleries": n_norm,
         "columns": out_cols,
         "excluded_qa_files": sorted(EXCLUDE),
         "columns_withheld_from_public_release": sorted(DROP_FROM_PUBLIC),
@@ -123,6 +135,7 @@ def main() -> int:
 
     print(f"  cohorts   {len(cohorts)}" + (f"  ({len(empty)} empty dropped: {', '.join(empty)})" if empty else ""))
     print(f"  rows      {len(rows):,}")
+    print(f"  distilleries {n_norm:,}" + (f"  ({n_raw - n_norm} spelling variants merged)" if n_raw != n_norm else ""))
     print(f"  columns   {len(out_cols)}")
     print(f"  sha256    {digest[:16]}…")
     return 0
