@@ -1,6 +1,6 @@
 {
   "built": "2026-09-22",
-  "rows": 10860,
+  "rows": 10768,
   "cohorts": 288,
   "columns": [
     "spirit_type",
@@ -36,7 +36,7 @@
     "anise_spirits_iraq",
     "rum_ndps_bottlers"
   ],
-  "sha256_spirits_inventory_csv": "d0e037a50164fcb4751cb4e5881f3404f80767ec495b542fdd2fe1ba85f6ce42",
+  "sha256_spirits_inventory_csv": "067f3e83e9cc7674c621f02e2848e933a50e9d5a3f56c4a5740f5625b473696d",
   "by_cohort": [
     {
       "cohort": "american_single_malt_california",
@@ -52,7 +52,7 @@
     },
     {
       "cohort": "american_single_malt_southeast_midwest_other",
-      "rows": 59
+      "rows": 58
     },
     {
       "cohort": "american_single_malt_texas",
@@ -136,15 +136,15 @@
     },
     {
       "cohort": "bourbon_kentucky_craft",
-      "rows": 245
+      "rows": 201
     },
     {
       "cohort": "bourbon_kentucky_majors",
-      "rows": 462
+      "rows": 431
     },
     {
       "cohort": "bourbon_ndps_bottlers",
-      "rows": 97
+      "rows": 91
     },
     {
       "cohort": "bourbon_other_states",
@@ -420,7 +420,7 @@
     },
     {
       "cohort": "gin_united_states",
-      "rows": 73
+      "rows": 72
     },
     {
       "cohort": "irish_whiskey_established",
@@ -440,11 +440,11 @@
     },
     {
       "cohort": "japanese_whisky_legacy_closed_ndps",
-      "rows": 561
+      "rows": 559
     },
     {
       "cohort": "japanese_whisky_nikka",
-      "rows": 34
+      "rows": 33
     },
     {
       "cohort": "japanese_whisky_other_new_craft",
@@ -452,7 +452,7 @@
     },
     {
       "cohort": "japanese_whisky_suntory",
-      "rows": 101
+      "rows": 100
     },
     {
       "cohort": "liqueur_argentina",
@@ -840,7 +840,7 @@
     },
     {
       "cohort": "rye_indiana",
-      "rows": 63
+      "rows": 62
     },
     {
       "cohort": "rye_kentucky",
@@ -848,15 +848,15 @@
     },
     {
       "cohort": "rye_ndps_bottlers",
-      "rows": 9
+      "rows": 10
     },
     {
       "cohort": "rye_northeast_mid_atlantic",
-      "rows": 58
+      "rows": 57
     },
     {
       "cohort": "rye_other_states",
-      "rows": 87
+      "rows": 86
     },
     {
       "cohort": "rye_tennessee",
@@ -892,7 +892,7 @@
     },
     {
       "cohort": "scotch_speyside",
-      "rows": 279
+      "rows": 277
     },
     {
       "cohort": "tennessee_whiskey",
@@ -900,7 +900,7 @@
     },
     {
       "cohort": "tequila_mexico",
-      "rows": 424
+      "rows": 423
     },
     {
       "cohort": "vermouth_argentina",
