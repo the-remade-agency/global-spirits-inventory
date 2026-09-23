@@ -4,6 +4,8 @@
   "cohorts": 288,
   "distillery_strings": 1744,
   "distilleries": 1734,
+  "spirit_types": 21,
+  "rows_with_source_pct": 100.0,
   "columns": [
     "spirit_type",
     "distillery",
