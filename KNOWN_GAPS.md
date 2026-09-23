@@ -69,18 +69,72 @@ the wrong spirit type: an amaro recorded as vermouth, gins recorded as liqueurs
 and the reverse. Mostly Liqueur and Gin, scheduled with those categories in
 January.
 
-**`vintage` carries two meanings.** For Daftmill, Kininvie and Foursquare it is
-the distillation year; for Old Forester Birthday Bourbon, Widow Jane and Boss
-Hog it is the release year. Both are documented in the schema, but the field
-cannot be read programmatically until the spec picks one rule. Being settled
-now.
+**`vintage` carries two meanings in the published data.** For Daftmill, Kininvie
+and Foursquare it is the distillation year; for Old Forester Birthday Bourbon,
+Widow Jane and Boss Hog it is the release year.
 
-**Some rows may name the wrong site for a producer that operates more than one.**
-A test comparing each row's age statement against its distillery's first year of
-production flagged 61 rows. Roughly two thirds of those flags rest on unverified
-recall rather than a fetched source, so they are being re-checked against
-sources rather than corrected in bulk. Corrections made on a hunch would be
-worse than the fault.
+The collection spec now settles it: `vintage` is the year the spirit was
+distilled, in every category, and a release year belongs at the front of
+`batch_lot` as `2019 Release`. **The published data does not yet follow that
+rule.** 515 rows are known to need re-keying and up to 506 more need checking
+against their labels, against 1,498 that are already correct.
+
+Until that pass runs, read a `vintage` in the US whiskey categories as a release
+year. The schema documentation in the README describes the data as it is rather
+than as the spec intends, and will change when the data does.
+
+**Thirty rows carry an age their named distillery cannot have produced.** A test
+comparing each row's age statement against its distillery's first year of
+production flagged 61 rows. Of those, 31 were corrected on fetched evidence: 24
+Old Forester Birthday Bourbon rows were naming a distillery that opened in 2018
+for whiskey distilled between 1989 and 2013.
+
+The other 30 are listed below with their evidence basis, and **have not been
+changed**. Four rest on model recall alone. Those are leads, not findings, and
+they are labelled so rather than quietly presented as facts.
+
+| Row | Cohort | Suspected | Basis |
+|---|---|---|---|
+| Tullamore D.E.W. 14, 18, and 15 Year Trilogy | irish_whiskey_established | Not distilled at Tullamore; own production from 2014, brand made at Midleton before | fetched + arithmetic |
+| Dunville's VR 20 and 21 Year | irish_whiskey_new_craft | Sourced; Echlinville first filled casks 5 Aug 2013 | fetched + arithmetic |
+| WhistlePig 12, 15, 18 Year, Boss Hog VII and VIII | rye_other_states | Sourced; farm production began 2015, aged stock outsourced | fetched + arithmetic |
+| St Nicholas Abbey 18, 20, 25 Year | rum_barbados | Foursquare-distilled stock | fetched, sourcing |
+| Fenwicks 4 and 5 Year (×3) | american_whiskey_indiana, bourbon_indiana | Sourced; distillery opened 2023 | fetched + arithmetic |
+| Milam & Greene Castle Hill 15 Year | bourbon_other_states | Distilled in Tennessee, filled 18 Jul 2007 | fetched, sourcing |
+| Milam & Greene Castle Hill 13 Year | bourbon_other_states | Same series, likely same source | **recall, unverified** |
+| Widow Jane The Vaults 15 and Black Opal 20 | bourbon_other_states | Sourced from undisclosed distilleries | fetched, sourcing |
+| Uncle Nearest 1856 and 1820 11 Year | tennessee_whiskey | Sourced; label says bottled at, not distilled at | fetched, sourcing / opening date |
+| Boxergrail Founder's 8 Year Rye | rye_kentucky | Rabbit Hole's distillery opened 2018 | fetched, opening date |
+| Bull Run Pinot Noir Finished 17 Year | american_whiskey_other_states | Distillery started 2010 | fetched + arithmetic |
+| Lancaster 7 Year Porter Cask | american_single_malt_northeast_mid_atlantic | Sourced; federal permit 2021 | fetched + arithmetic |
+| The First Millionaire 4 Year | american_single_malt_california | Calistoga Depot opened Apr 2024 | fetched, opening date |
+| Old Hamer 10 Year | bourbon_indiana | Sourced; West Fork's opening year unconfirmed | **recall, unverified** |
+| Pierre Ferrand Abel 45 Year | cognac_france | Probably a false positive; flag used an ownership change, not a distillation date | **recall, unverified** |
+| Tipperary Homegrown 8 Year | irish_whiskey_new_craft | May predate the farm distillery | **recall, unverified** |
+| Bimber Apogee XII 12 Year | world_whiskey_england | Arithmetically impossible, see below | fetched + arithmetic |
+
+**Bimber Apogee XII is the firmest of these.** Bimber laid its first casks on 26
+May 2016, so a twelve-year-old Bimber distillate cannot exist before 2028. The
+producer's own page describes it as a blended malt of Highland and Speyside
+whiskies finished in Bimber casks. The row's `own_make` and its distillery are
+both wrong, and as a Scotch-origin blended malt it is also in the wrong cohort.
+
+**One correction rests on a weaker source than the rest.** The 24 Old Forester
+rows depend on Old Forester production having moved to the Shively plant in
+1979, and the only page found for that date is an enthusiast site. Thirteen rows
+(the 2002 to 2015 releases) rest on it; the 2004-and-later releases have a
+producer press release. The correction was kept because the previous value named
+a distillery that did not exist when the whiskey was made, which is wrong on
+arithmetic rather than on sourcing. A weakly sourced right answer beats a
+well-formatted wrong one.
+
+**Also open:** other Parker's Heritage rows still name Bernheim although some
+predate Heaven Hill's 1999 acquisition of it, and two `rye_kentucky` rows give
+Brown-Forman Distillery's location as Louisville rather than Shively.
+
+**103 rows at 34 distilleries could not be tested at all**, because no
+first-distillation year was found. A registry of sourced first-production years
+now covers 46 distilleries, each with a fetched page, and grows each pass.
 
 **103 rows at 34 distilleries could not be tested at all**, because no
 first-distillation year was found for the distillery. A registry of sourced
