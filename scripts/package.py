@@ -7,7 +7,7 @@ files cannot drift: both are produced from one source in one pass.
 
     python3 scripts/package.py --src /path/to/inventory_research/_outputs
 """
-import argparse, csv, glob, hashlib, json, os, sys
+import argparse, csv, glob, hashlib, json, os, re, sys
 from datetime import date
 
 # QA working files, not inventory. They carry their own schema (csv_file,
