@@ -1,6 +1,6 @@
 {
   "built": "2026-09-22",
-  "rows": 10768,
+  "rows": 10743,
   "cohorts": 288,
   "columns": [
     "spirit_type",
@@ -36,7 +36,7 @@
     "anise_spirits_iraq",
     "rum_ndps_bottlers"
   ],
-  "sha256_spirits_inventory_csv": "fa412b58a804eb615ff9c6b243c6e039ca481240b7cc40357fa99b55b6ff4756",
+  "sha256_spirits_inventory_csv": "90ce4ae148fd06e543bc585f409f25123438d2665459f01ffc1babb84c15c20b",
   "by_cohort": [
     {
       "cohort": "american_single_malt_california",
@@ -136,7 +136,7 @@
     },
     {
       "cohort": "bourbon_kentucky_craft",
-      "rows": 201
+      "rows": 200
     },
     {
       "cohort": "bourbon_kentucky_majors",
@@ -416,7 +416,7 @@
     },
     {
       "cohort": "gin_united_kingdom",
-      "rows": 184
+      "rows": 183
     },
     {
       "cohort": "gin_united_states",
@@ -464,7 +464,7 @@
     },
     {
       "cohort": "liqueur_australia",
-      "rows": 24
+      "rows": 23
     },
     {
       "cohort": "liqueur_austria",
@@ -484,7 +484,7 @@
     },
     {
       "cohort": "liqueur_canada",
-      "rows": 18
+      "rows": 15
     },
     {
       "cohort": "liqueur_china",
@@ -560,7 +560,7 @@
     },
     {
       "cohort": "liqueur_japan",
-      "rows": 24
+      "rows": 23
     },
     {
       "cohort": "liqueur_korea",
@@ -624,11 +624,11 @@
     },
     {
       "cohort": "liqueur_south_africa",
-      "rows": 10
+      "rows": 8
     },
     {
       "cohort": "liqueur_spain",
-      "rows": 5
+      "rows": 4
     },
     {
       "cohort": "liqueur_sweden",
@@ -648,7 +648,7 @@
     },
     {
       "cohort": "liqueur_united_states",
-      "rows": 81
+      "rows": 80
     },
     {
       "cohort": "liqueur_us_virgin_islands",
@@ -912,7 +912,7 @@
     },
     {
       "cohort": "vermouth_france",
-      "rows": 17
+      "rows": 15
     },
     {
       "cohort": "vermouth_germany",
@@ -920,15 +920,15 @@
     },
     {
       "cohort": "vermouth_italy",
-      "rows": 56
+      "rows": 48
     },
     {
       "cohort": "vermouth_spain",
-      "rows": 30
+      "rows": 27
     },
     {
       "cohort": "vermouth_united_kingdom",
-      "rows": 5
+      "rows": 4
     },
     {
       "cohort": "vermouth_united_states",

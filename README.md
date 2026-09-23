@@ -3,13 +3,13 @@
 A structured, openly licensed reference dataset of spirits by type and country,
 compiled from producer and retailer sources on the public web.
 
-**10,768 expressions · 1,747 distilleries · 21 spirit types · 288 cohorts**
+**10,743 expressions · 1,743 distilleries · 21 spirit types · 288 cohorts**
 
 Every row carries where it came from and when it was last checked. `source_urls`
 and `last_verified` are populated on 100% of rows.
 
-For 94.5% of rows the listed URL points at the page that substantiates
-the entry, so it can be re-verified directly. The remaining 597 rows (5.5%) cite
+For 96.4% of rows the listed URL points at the page that substantiates
+the entry, so it can be re-verified directly. The remaining 386 rows (3.6%) cite
 only a producer or retailer homepage, which proves the producer exists but not
 the specific expression. Those are listed in [`KNOWN_GAPS.md`](KNOWN_GAPS.md) and
 are being re-sourced on the quarterly passes through to July 2027. We would
@@ -19,7 +19,7 @@ rather name that than round it up to 100%.
 
 | File | What it is |
 |---|---|
-| [`data/spirits_inventory.csv`](data/spirits_inventory.csv) | everything in one file, 10,768 rows. Start here. |
+| [`data/spirits_inventory.csv`](data/spirits_inventory.csv) | everything in one file, 10,743 rows. Start here. |
 | [`data/by_cohort/`](data/by_cohort) | the same rows split into 288 files by spirit type and region |
 | [`data/manifest.json`](data/manifest.json) | build date, row counts per cohort, SHA-256 of the consolidated file |
 
@@ -33,7 +33,7 @@ citation points at data that does not move under you.
 
 ## Schema
 
-10,768 rows, 21 columns.
+10,743 rows, 21 columns.
 
 | Column | Notes |
 |---|---|
@@ -72,9 +72,9 @@ Completeness varies by field, and the dataset does not pretend otherwise:
 | `source_urls` | 100.0% |
 | `last_verified` | 99.98% |
 | `abv` | 78.6% |
-| `proof` | 77.6% |
-| `age_statement` | 58.9% |
-| `label_image_url` | 47.5% |
+| `proof` | 77.7% |
+| `age_statement` | 59.0% |
+| `label_image_url` | 47.6% |
 | `mash_bill` | 38.3% |
 
 A blank is a blank. Where a value could not be sourced it is empty or `NULL`
@@ -100,7 +100,7 @@ redistributed here.
 
 ## This will contain errors
 
-10,768 rows compiled from the public web will include mistakes: renamed
+10,743 rows compiled from the public web will include mistakes: renamed
 expressions, discontinued lines, transcription errors, sources that have since
 moved. That is the nature of the exercise, not an excuse.
 
