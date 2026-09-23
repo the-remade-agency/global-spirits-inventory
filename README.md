@@ -118,8 +118,11 @@ is published as a tagged release. First scheduled pass: **October 2026**.
 [CC BY 4.0](LICENSE). Use it, change it, build on it, sell things with it. The
 one condition is attribution:
 
-> Global Spirits Inventory, The Remade Agency, CC BY 4.0.
+> Pace, E. Global Spirits Inventory. The Remade Agency. CC BY 4.0.
 > https://github.com/the-remade-agency/global-spirits-inventory
+
+GitHub's **Cite this repository** button on the sidebar generates that for you,
+in APA or BibTeX, from [`CITATION.cff`](CITATION.cff).
 
 ## Rebuilding
 

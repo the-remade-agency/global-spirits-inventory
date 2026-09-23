@@ -36,7 +36,7 @@
     "anise_spirits_iraq",
     "rum_ndps_bottlers"
   ],
-  "sha256_spirits_inventory_csv": "067f3e83e9cc7674c621f02e2848e933a50e9d5a3f56c4a5740f5625b473696d",
+  "sha256_spirits_inventory_csv": "fa412b58a804eb615ff9c6b243c6e039ca481240b7cc40357fa99b55b6ff4756",
   "by_cohort": [
     {
       "cohort": "american_single_malt_california",
@@ -132,7 +132,7 @@
     },
     {
       "cohort": "bourbon_indiana",
-      "rows": 99
+      "rows": 100
     },
     {
       "cohort": "bourbon_kentucky_craft",
@@ -148,7 +148,7 @@
     },
     {
       "cohort": "bourbon_other_states",
-      "rows": 152
+      "rows": 151
     },
     {
       "cohort": "bourbon_tennessee_bourbon",

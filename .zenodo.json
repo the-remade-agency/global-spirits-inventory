@@ -1,0 +1,31 @@
+{
+  "upload_type": "dataset",
+  "title": "Global Spirits Inventory: an openly licensed reference dataset of spirits by type and country",
+  "description": "<p>A structured reference dataset of spirits by type and country, compiled from producer and retailer sources on the public web. Country is the top axis and spirit type the next, across categories from bourbon and Scotch to mezcal, armagnac and vermouth.</p><p>Each row records the distillery that made the liquid rather than the brand on the label, where it was distilled, strength, recipe, cask, and any age statement or named release. Every row carries the URLs that substantiate it and the date those sources were last checked, so entries can be traced back and re-verified rather than taken on trust.</p><p>Published in two views generated from one source: a single consolidated file, and the same rows split by spirit type and region. Refreshed quarterly, with each pass published as a tagged release so a citation points at data that does not move.</p><p>Known gaps are documented rather than rounded away. See KNOWN_GAPS.md in the repository.</p>",
+  "creators": [
+    {
+      "name": "Pace, Eric",
+      "affiliation": "The Remade Agency"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "keywords": [
+    "spirits",
+    "distilled beverages",
+    "whisky",
+    "whiskey",
+    "reference dataset",
+    "open data",
+    "provenance",
+    "beverage alcohol",
+    "distilleries"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/the-remade-agency/global-spirits-inventory",
+      "relation": "isSupplementTo",
+      "resource_type": "dataset"
+    }
+  ]
+}

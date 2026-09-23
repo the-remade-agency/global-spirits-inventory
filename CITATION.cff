@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+type: dataset
+message: "If you use this dataset, please cite it as below."
+title: "Global Spirits Inventory"
+abstract: >-
+  An openly licensed reference dataset of spirits by type and country, compiled
+  from producer and retailer sources on the public web. Every row carries the
+  sources that substantiate it and the date they were last checked.
+authors:
+  - family-names: Pace
+    given-names: Eric
+    affiliation: The Remade Agency
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+repository-code: "https://github.com/the-remade-agency/global-spirits-inventory"
+license: CC-BY-4.0
+keywords:
+  - spirits
+  - distilled beverages
+  - reference dataset
+  - open data
+  - provenance
