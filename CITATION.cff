@@ -11,6 +11,18 @@ authors:
     given-names: Eric
     affiliation: The Remade Agency
     orcid: "https://orcid.org/0009-0005-1146-0234"
+# Set at publication, step 6.3. version is the tag being cut, date-released the
+# day it is cut. doi is the Zenodo CONCEPT DOI, the one that always resolves to
+# the newest version, not the per-release DOI, so this line is written once and
+# then left alone.
+#
+# It is absent until the first release exists: Zenodo mints the DOI from the
+# release webhook, and this file is captured inside that release, so v2026.10
+# cannot cite its own identifier. Add it immediately after the first mint and
+# every later release carries it.
+version: "v2026.10"
+date-released: "2026-10-01"
+# doi: "10.5281/zenodo.XXXXXXX"
 repository-code: "https://github.com/the-remade-agency/global-spirits-inventory"
 license: CC-BY-4.0
 keywords:
