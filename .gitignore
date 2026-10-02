@@ -10,3 +10,4 @@ _outputs_backup_*/
 .env.*
 *.key
 *.pem
+.baseline/
