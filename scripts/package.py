@@ -15,6 +15,23 @@ from datetime import date
 # files rather than adding any.
 EXCLUDE = {"bourbon_ndp_audit", "bourbon_template_audit"}
 
+# The dataset writes absent optional values as the literal string "NULL", not
+# as an empty field. 4,785 rows carry it in label_image_url alone.
+#
+# Treating "non-empty string" as "has a value" therefore counts every one of
+# those as populated. On 2026-10-02 that put label image coverage at 92.2% on
+# the website and in the dashboard when the real figure is 47.6%, which the
+# project's own harness had been reporting as ~50% all along.
+#
+# Every presence test goes through this. source_urls and last_verified are
+# unaffected: both are genuinely 100%, with no blanks and no sentinels.
+SENTINELS = {"NULL", "N/A", "NA", "NONE", "-", "TBD", "UNKNOWN"}
+
+
+def has_value(row, col):
+    v = (row.get(col) or "").strip()
+    return bool(v) and v.upper() not in SENTINELS
+
 # The cohort is encoded only in the source filename. Consolidating without
 # promoting it to a column silently loses the grouping that distinguishes, say,
 # bourbon_kentucky_craft from bourbon_indiana.
@@ -119,7 +136,7 @@ def main() -> int:
     digest = hashlib.sha256(open(consolidated, "rb").read()).hexdigest()
     n_raw, n_norm = distillery_counts(rows)
     n_types = len({r["spirit_type"].strip() for r in rows if r.get("spirit_type", "").strip()})
-    n_sourced = sum(1 for r in rows if (r.get("source_urls") or "").strip())
+    n_sourced = sum(1 for r in rows if has_value(r, "source_urls"))
     manifest = {
         "built": date.today().isoformat(),
         "rows": len(rows),

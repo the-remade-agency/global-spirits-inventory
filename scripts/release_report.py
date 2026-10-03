@@ -23,6 +23,7 @@ import csv
 import io
 import re
 import subprocess
+import importlib.util
 import sys
 
 # The collection spec's upsert key. Distillery and spirit type join it here:
@@ -31,6 +32,9 @@ KEY = ("spirit_type", "distillery", "spirit_name", "special_designation",
        "age_statement", "vintage", "batch_lot")
 
 CSV_PATH = "data/spirits_inventory.csv"
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from package import has_value  # noqa: E402  the dataset writes "NULL" as a string
 
 # Changes to these are noise in a release note: they move on almost every row
 # whenever a maintenance pass touches it, and say nothing about the bottle.
@@ -72,7 +76,7 @@ def key_of(row):
 
 def totals(rows):
     names = {r["distillery"].strip() for r in rows if r.get("distillery", "").strip()}
-    sourced = sum(1 for r in rows if (r.get("source_urls") or "").strip())
+    sourced = sum(1 for r in rows if has_value(r, "source_urls"))
     return {
         "rows": len(rows),
         "distilleries": len({norm_distillery(n) for n in names}),

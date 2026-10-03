@@ -39,9 +39,14 @@ VAULT = os.path.expanduser(
 # deliberately sourceless rows because auditing them is its job.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 try:
-    from package import EXCLUDE as QA_FILES
+    from package import EXCLUDE as QA_FILES, has_value
 except Exception:
     QA_FILES = set()
+
+    def has_value(row, col):            # noqa: D103 - fallback only
+        v = (row.get(col) or "").strip()
+        return bool(v) and v.upper() not in {"NULL", "N/A", "NA", "NONE", "-", "TBD", "UNKNOWN"}
+
     print("warning: could not import EXCLUDE from package.py; "
           "QA files will be judged as publishable", file=sys.stderr)
 
@@ -164,7 +169,7 @@ def check_fabrication(rows):
               [f"{k[2][:40]} | {k[4]} | in {', '.join(v)}" for k, v in list(dupes.items())[:12]])
 
     nosrc = [f"{val(r,'spirit_name')[:40]} [{r['__file']}]"
-             for r in rows if not val(r, "source_urls")]
+             for r in rows if not has_value(r, "source_urls")]
     if nosrc:
         block("no_source",
               f"{len(nosrc)} row(s) carry no source_urls at all. The dataset's whole "
@@ -236,11 +241,71 @@ def check_docket(rows):
         rs = [r for r in rows
               if p.lower() in f"{r.get('distillery','')} {r.get('spirit_name','')} "
                               f"{r.get('producer_brand','')}".lower()]
-        with_v = [r for r in rs if (r.get("vintage") or "").strip()]
+        with_v = [r for r in rs if has_value(r, "vintage")]
         cats = sorted({r.get("spirit_type", "") for r in rs})
         note("docket_vintage",
              f"{p}: {len(rs)} rows across {len(cats)} categor{'y' if len(cats)==1 else 'ies'}, "
              f"{len(with_v)} carrying a vintage", cats)
+
+
+# ── 3b. The README's own coverage table, as an independent reference ─────────
+
+def check_readme_table(rows):
+    """Compare computed coverage against the table README.md publishes.
+
+    Added after the table caught a bug in this very script. On 2026-10-02 the
+    gate and the dashboard reported label_image_url at 92.2% and shipped that
+    to the website, because their presence test counted the literal string
+    "NULL" as a value. The README had said 47.6% the whole time, and nobody
+    compared them.
+
+    Two independently produced numbers that must agree is worth more than
+    either one alone. A mismatch means the data moved and the table is stale,
+    or the computation is wrong, and both need a person.
+    """
+    try:
+        text = open(os.path.join(os.path.dirname(__file__), "..", "README.md")).read()
+    except OSError:
+        note("readme_table", "README.md not readable; coverage cross-check skipped")
+        return
+
+    claims = re.findall(r"^\| `([a-z_]+)` \| ([\d.]+)% \|$", text, re.M)
+    if not claims:
+        note("readme_table", "no coverage table found in README.md")
+        return
+
+    # The README describes the last published build. After a maintenance run
+    # the data has moved and the table is stale by definition, which is not a
+    # fault and is fixed at step 6.3. The two cases need separating, or this
+    # blocks on every run and gets ignored, which is worse than not checking.
+    stated = re.search(r"\*\*([\d,]+) expressions", text)
+    stated_rows = int(stated.group(1).replace(",", "")) if stated else None
+    same_build = stated_rows == len(rows)
+
+    off = []
+    for col, claimed in claims:
+        if col not in rows[0]:
+            off.append(f"{col}: in the README table, not in the data")
+            continue
+        actual = round(100 * sum(1 for r in rows if has_value(r, col)) / len(rows), 2)
+        if abs(actual - float(claimed)) > 0.15:
+            off.append(f"{col}: README says {claimed}%, data says {actual:.2f}%")
+
+    if not off:
+        note("readme_table", f"all {len(claims)} fields in the README coverage table "
+                             f"match the data")
+    elif same_build:
+        # Same row count, different percentages. One of the two is wrong and
+        # neither can be assumed; this is the case that caught the sentinel bug.
+        block("readme_coverage",
+              f"The README describes {stated_rows:,} rows, the data has the same "
+              f"count, and {len(off)} coverage figure(s) still disagree. Either the "
+              f"table or the computation is wrong.", off)
+    else:
+        note("readme_table",
+             f"README describes {stated_rows:,} rows, data has {len(rows):,}: the "
+             f"table is stale and needs updating at step 6.3. {len(off)} figure(s) "
+             f"will change.", off)
 
 
 # ── 4. Coverage, reported rather than judged ─────────────────────────────────
@@ -248,11 +313,11 @@ def check_docket(rows):
 def check_coverage(rows, diff):
     def pct(n):
         return f"{100 * n / len(rows):.1f}%" if rows else "-"
-    img = sum(1 for r in rows if (r.get("label_image_url") or "").strip())
+    img = sum(1 for r in rows if has_value(r, "label_image_url"))
     note("label_images", f"label_image_url on {img:,}/{len(rows):,} ({pct(img)})")
 
     bare = sum(1 for r in rows
-               if (r.get("source_urls") or "").strip()
+               if has_value(r, "source_urls")
                and not re.search(r"https?://[^/]+/\S", r["source_urls"]))
     note("bare_sources", f"{bare:,} row(s) cite a bare host with no path ({pct(bare)})")
 
@@ -278,6 +343,7 @@ def main():
     diff = check_diff(per_file, base)
     check_fabrication(publishable)
     check_docket(publishable)
+    check_readme_table(publishable)
     check_coverage(publishable, diff)
     if held:
         note("qa_files",

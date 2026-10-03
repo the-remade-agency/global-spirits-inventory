@@ -35,6 +35,9 @@ from urllib.parse import urlsplit
 
 CSV_PATH = "data/spirits_inventory.csv"
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from package import has_value  # noqa: E402  "NULL" is a value in this data
+
 # An allow-list, deliberately, not a list of things to strip. A block-list
 # leaks anything added upstream later; this excludes it until someone adds it
 # here on purpose. What it currently keeps out:
@@ -89,7 +92,7 @@ def build(rows):
     def v(r, k):
         return (r.get(k) or "").strip()
 
-    imaged = [r for r in rows if v(r, "label_image_url")]
+    imaged = [r for r in rows if has_value(r, "label_image_url")]
     ndp_rows = [r for r in rows if v(r, "is_ndp").lower() in ("true", "1", "yes")]
     brands = {v(r, "producer_brand") for r in ndp_rows if v(r, "producer_brand")}
     names = {v(r, "distillery") for r in rows if v(r, "distillery")}
@@ -111,7 +114,7 @@ def build(rows):
             "classes": collections.Counter(), "countries": collections.Counter(),
         })
         c["rows"] += 1
-        if v(r, "label_image_url"):
+        if has_value(r, "label_image_url"):
             c["imaged_url"] += 1
         if v(r, "is_ndp").lower() in ("true", "1", "yes"):
             c["ndp"] += 1
