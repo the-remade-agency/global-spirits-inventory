@@ -29,8 +29,13 @@ import os
 import re
 import sys
 
-VAULT = os.path.expanduser(
-    "~/Documents/_local_drive/markdown_lib/inventory_research/_outputs")
+# Where the run's working files live. Local by default and overridable, because
+# the archive location is moving to Drive while the working location stays
+# local: Drive's file provider can present a partially synced file as a
+# complete one, which a checksum gate must never read.
+VAULT = os.path.expanduser(os.environ.get(
+    "SPIRITS_OUTPUTS",
+    "~/Documents/_local_drive/markdown_lib/inventory_research/_outputs"))
 
 # The QA working files package.py keeps out of the public build. Imported from
 # package.py rather than restated, so the gate cannot end up blocking on a file
