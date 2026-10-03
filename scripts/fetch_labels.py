@@ -49,7 +49,14 @@ UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " \
      "(KHTML, like Gecko) Chrome/120.0 Safari/537.36"
 OK_TYPES = ("image/jpeg", "image/png", "image/webp", "image/avif",
             "image/gif", "image/svg+xml")
-MAX_BYTES = 12 * 1024 * 1024
+MAX_BYTES = 40 * 1024 * 1024   # 12MB rejected eight legitimate product shots
+
+# Wikimedia blocks generic browser strings and asks for a descriptive agent
+# with contact details. Sending Chrome's gets 403 on every one of them.
+# https://meta.wikimedia.org/wiki/User-Agent_policy
+WIKIMEDIA_UA = ("global-spirits-inventory/1.0 "
+                "(+https://github.com/the-remade-agency/global-spirits-inventory; "
+                "admin@theremadeagency.com)")
 
 
 def key(url):
@@ -117,9 +124,34 @@ def check_convention():
     return not bad
 
 
-def fetch(url):
-    req = urllib.request.Request(url, headers={
-        "User-Agent": UA, "Accept": "image/avif,image/webp,image/*,*/*;q=0.8"})
+def encode(url):
+    """Percent-encode non-ASCII path and query bytes.
+
+    urllib raises UnicodeEncodeError on a raw accented character in a URL, so
+    two product shots failed on the filename rather than on the server."""
+    from urllib.parse import quote, urlsplit, urlunsplit
+    p = urlsplit(url)
+    return urlunsplit((p.scheme, p.netloc,
+                       quote(p.path, safe="/%:@!$&'()*+,;=~"),
+                       quote(p.query, safe="/%:@!$&'()*+,;=~?"), ""))
+
+
+def fetch(url, attempt=0):
+    ua = WIKIMEDIA_UA if "wikimedia.org" in url or "wikipedia.org" in url else UA
+    req = urllib.request.Request(encode(url), headers={
+        "User-Agent": ua, "Accept": "image/avif,image/webp,image/*,*/*;q=0.8"})
+    try:
+        return _read(req)
+    except urllib.error.HTTPError as e:
+        # 429 is the server asking for patience, not a refusal. Back off twice
+        # before giving up; everything else is answered immediately.
+        if e.code == 429 and attempt < 2:
+            time.sleep(4 * (attempt + 1))
+            return fetch(url, attempt + 1)
+        raise
+
+
+def _read(req):
     with urllib.request.urlopen(req, timeout=25) as r:
         ct = r.headers.get("Content-Type", "")
         if not any(t in ct for t in OK_TYPES):
@@ -139,6 +171,8 @@ def main():
     ap.add_argument("--limit", type=int)
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--report", default=None)
+    ap.add_argument("--retry-failed", metavar="REPORT",
+                    help="retry only the URLs that failed in a previous report")
     a = ap.parse_args()
 
     if not os.path.isdir(LABELS):
@@ -151,7 +185,12 @@ def main():
         sys.exit("refusing to download against an unverified naming convention")
 
     have, found = cached(), urls_in_outputs()
-    todo = [u for u in found if key(u) not in have]
+    if a.retry_failed:
+        prior = json.load(open(a.retry_failed))["failed"]
+        todo = [x["url"] for x in prior if key(x["url"]) not in have]
+        print(f"  retrying {len(todo):,} of {len(prior):,} prior failures")
+    else:
+        todo = [u for u in found if key(u) not in have]
     todo.sort()
     if a.limit:
         todo = todo[:a.limit]
