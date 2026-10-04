@@ -44,9 +44,15 @@ VAULT = os.path.expanduser(os.environ.get(
 # deliberately sourceless rows because auditing them is its job.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 try:
-    from package import EXCLUDE as QA_FILES, has_value
+    from package import EXCLUDE as QA_FILES, has_value, fold
 except Exception:
     QA_FILES = set()
+
+    def fold(s):                        # noqa: D103 - fallback only
+        import unicodedata
+        s = unicodedata.normalize("NFKD", s or "")
+        s = "".join(c for c in s if not unicodedata.combining(c))
+        return re.sub(r"[^a-z0-9]", "", s.casefold())
 
     def has_value(row, col):            # noqa: D103 - fallback only
         v = (row.get(col) or "").strip()
@@ -89,7 +95,8 @@ def note(code, msg, detail=None):
 
 
 def norm(s):
-    return re.sub(r"[^a-z0-9]", "", (s or "").casefold())
+    # Fold accents rather than deleting them; see package.fold for why.
+    return fold(s or "")
 
 
 def load_vault():
@@ -229,18 +236,54 @@ def check_docket(rows):
     else:
         note("docket_variants", "all 10 spelling pairs collapsed")
 
-    # Any NEW collision introduced this run is a regression, not a leftover.
+    # A collision the run introduced is a regression. One it inherited is a
+    # backlog item. Blaming the run for either sends the reader to the wrong
+    # place, so classify against the pre-run copy rather than against the
+    # docket list. Six accent-variant pairs were reported as "introduced by
+    # this run" on 2026-10-04 when all six pre-dated it.
     groups = collections.defaultdict(set)
     for n in names:
         if n:
             groups[norm(n)].add(n)
     live = {k: sorted(v) for k, v in groups.items() if len(v) > 1}
-    known = {norm(a) for a, _ in DOCKET_VARIANTS}
-    fresh = {k: v for k, v in live.items() if k not in known}
-    if fresh:
-        block("new_variants",
-              f"{len(fresh)} distillery spelling collision(s) not on the docket. "
-              f"These were introduced by this run.", [", ".join(v) for v in fresh.values()][:12])
+
+    before = None
+    backup = os.path.expanduser(os.environ.get("SPIRITS_PRERUN", ""))
+    if backup and os.path.isdir(backup):
+        pre_names = set()
+        for f in glob.glob(os.path.join(backup, "*.csv")):
+            if os.path.splitext(os.path.basename(f))[0] in QA_FILES:
+                continue
+            try:
+                for r in csv.DictReader(open(f, newline="")):
+                    if (r.get("distillery") or "").strip():
+                        pre_names.add(r["distillery"].strip())
+            except OSError:
+                pass
+        pg = collections.defaultdict(set)
+        for n in pre_names:
+            pg[norm(n)].add(n)
+        before = {k for k, v in pg.items() if len(v) > 1}
+
+    if before is None:
+        if live:
+            note("variants_live",
+                 f"{len(live)} distillery spelling collision(s) present. No pre-run copy "
+                 f"given (set SPIRITS_PRERUN), so these cannot be split into inherited "
+                 f"and introduced.", [", ".join(v) for v in live.values()][:12])
+    else:
+        fresh = {k: v for k, v in live.items() if k not in before}
+        old_ = {k: v for k, v in live.items() if k in before}
+        if fresh:
+            block("new_variants",
+                  f"{len(fresh)} distillery spelling collision(s) introduced by this run. "
+                  f"Merging ten and creating one is not progress.",
+                  [", ".join(v) for v in fresh.values()][:12])
+        if old_:
+            note("variants_inherited",
+                 f"{len(old_)} spelling collision(s) pre-date the run and are still open "
+                 f"({len(before)} before, {len(live)} now). Backlog, not a regression.",
+                 [", ".join(v) for v in old_.values()][:12])
 
     for p in DOCKET_VINTAGE_PRODUCERS:
         rs = [r for r in rows

@@ -7,7 +7,7 @@ files cannot drift: both are produced from one source in one pass.
 
     python3 scripts/package.py --src /path/to/inventory_research/_outputs
 """
-import argparse, csv, glob, hashlib, json, os, re, sys
+import argparse, csv, glob, hashlib, json, os, re, sys, unicodedata
 from datetime import date
 
 # QA working files, not inventory. They carry their own schema (csv_file,
@@ -50,13 +50,26 @@ COHORT_COL = "cohort"
 DROP_FROM_PUBLIC = {"tasting_notes"}
 
 
+def fold(s):
+    """Casefold, strip accents, drop punctuation.
+
+    Decomposing first matters. Filtering on [^a-z0-9] alone *deletes* an
+    accented character rather than folding it, so "Clement" normalises to
+    "clement" and "Clement" with an acute to "clment", and the two never match.
+    That hid six real producer collisions, among them Habitation Clement,
+    Chateau de Beaulon and Patron, and inflated the published distillery count.
+    Found because a research subagent flagged duplicates this had passed."""
+    s = unicodedata.normalize("NFKD", s or "")
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return re.sub(r"[^a-z0-9]", "", s.casefold())
+
+
 def distillery_counts(rows):
-    """Distinct distillery strings, and distinct distilleries after normalising
-    case and punctuation. The two differ where one producer is spelled two ways;
-    the normalised figure is the one quoted in the README."""
+    """Distinct distillery strings, and distinct distilleries after folding.
+    The two differ where one producer is spelled several ways; the folded
+    figure is the one quoted in the README."""
     names = {r["distillery"].strip() for r in rows if r.get("distillery", "").strip()}
-    norm = {re.sub(r"[^a-z0-9]", "", n.casefold()) for n in names}
-    return len(names), len(norm)
+    return len(names), len({fold(n) for n in names})
 
 
 def main() -> int:
