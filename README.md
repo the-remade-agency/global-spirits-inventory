@@ -1,13 +1,6 @@
 # Global Spirits Inventory
 
-<!-- DOI badge. Uncomment and fill in the concept DOI immediately after the
-     first Zenodo mint, replacing both numbers with the same value. The concept
-     DOI always resolves to the newest version, so this is written once.
-     It cannot be here before v2026.10 exists: Zenodo mints from the release
-     webhook, and this file is captured inside the release it would cite.
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
--->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23146212.svg)](https://doi.org/10.5281/zenodo.23146212)
 
 A structured, openly licensed reference dataset of spirits by type and country,
 compiled from producer and retailer sources on the public web.

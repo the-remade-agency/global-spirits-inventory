@@ -22,7 +22,7 @@ authors:
 # every later release carries it.
 version: "v2026.10"
 date-released: "2026-10-04"
-# doi: "10.5281/zenodo.XXXXXXX"
+doi: "10.5281/zenodo.23146212"
 repository-code: "https://github.com/the-remade-agency/global-spirits-inventory"
 license: CC-BY-4.0
 keywords:
