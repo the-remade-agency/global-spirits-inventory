@@ -2,12 +2,12 @@
 
 Things this dataset does not yet do well, named rather than rounded away.
 
-Current as of the 2026-09-22 build: 10,743 rows, 1,734 distilleries,
-288 cohorts.
+Current as of the 2026-10-04 build: 12,889 rows, 1,937 distilleries,
+297 cohorts.
 
 ## Rows whose source is a homepage, not a page
 
-386 rows (3.6%) cite only a producer or retailer homepage.
+336 rows (2.6%) cite only a producer or retailer homepage.
 `source_urls` is populated, so the row passes validation, but the URL proves the
 producer exists rather than substantiating this particular expression. Those rows
 cannot be re-verified from the link as listed.
@@ -52,6 +52,7 @@ a weak citation.
 | Pass | Scope | Status |
 |---|---|---|
 | Sep 2026 | Internal-reference rows, and all Vermouth | done, 185 rows re-sourced |
+| Oct 2026 | Carry-forward followups across all 21 categories | done, 466 enumeration items still unreached |
 | Jan 2027 | Tequila, Liqueur, Gin | 178 rows |
 | Apr 2027 | Remaining cohorts with five or more, mostly Scotch | 78 rows |
 | Jul 2027 | The tail, folded into each cohort's normal re-verify | the rest |
@@ -64,27 +65,19 @@ row returns when a page-level source is found for it.
 
 ## Known data faults
 
-**Ten distilleries appear under two spellings.** The `distillery` column holds
-1,744 distinct strings, of which ten are capitalisation or punctuation variants
-of another entry. The real count is 1,734, which is the figure quoted above and
-in the README. Anyone grouping on the raw string will get 1,744 and should
-normalise first.
+**Distillery spellings were normalised in the October pass.** Sixteen producers
+had been written two ways. Ten were capitalisation or punctuation variants and
+were merged during the run; six more were accent variants, where one spelling
+carried a diacritic and the other did not, and were merged on 2026-10-04. Each
+now uses the producer's own spelling.
 
-| Spelling | Rows | Also appears as | Rows |
-| --- | ---: | --- | ---: |
-| `KOVAL Distillery` | 5 | `Koval Distillery` | 3 |
-| `La Nina del Mezcal (CRM NOM O170X)` | 1 | `La Nina del Mezcal (CRM NOM-O170X)` | 4 |
-| `Leopold Bros` | 2 | `Leopold Bros.` | 6 |
-| `Los Siete Misterios (CRM NOM O153X)` | 5 | `Los Siete Misterios (CRM NOM-O153X)` | 5 |
-| `Mezcalero (CRM NOM O14X)` | 6 | `Mezcalero (CRM NOM-O14X)` | 21 |
-| `Never Never Distilling Co` | 1 | `Never Never Distilling Co.` | 4 |
-| `Paul Marie & Fils` | 2 | `Paul-Marie & Fils` | 2 |
-| `SAKURAO Distillery` | 8 | `Sakurao Distillery` | 1 |
-| `St George Spirits` | 2 | `St. George Spirits` | 19 |
-| `The Distillery (Phuket)` | 1 | `The Distillery Phuket` | 1 |
+The accent pairs had gone undetected because the check that found the first ten
+stripped accented characters rather than folding them, so `Clement` and
+`Clement` with an acute did not compare equal. They were not introduced by the
+run; they predate it.
 
-No row is wrong; the name is inconsistent between rows. Queued for the October
-pass, where the merge also fixes the NOM formatting on the three mezcal entries.
+No collisions remain. The 1,937 distilleries quoted above is both the count of
+distinct strings and the count after normalising, and the two now agree.
 
 **Sixteen rows are miscategorised.** The product exists, the row is filed under
 the wrong spirit type: an amaro recorded as vermouth, gins recorded as liqueurs
@@ -98,8 +91,9 @@ Widow Jane and Boss Hog it is the release year.
 The collection spec now settles it: `vintage` is the year the spirit was
 distilled, in every category, and a release year belongs at the front of
 `batch_lot` as `2019 Release`. **The published data does not yet follow that
-rule.** 515 rows are known to need re-keying and up to 506 more need checking
-against their labels, against 1,498 that are already correct.
+rule.** The October pass converted twelve of the twenty-one categories. Bourbon
+was not reached, leaving up to 292 rows there, and the wider group of about 506
+rows needing a check against their labels is untouched except for Mezcal's 49.
 
 Until that pass runs, read a `vintage` in the US whiskey categories as a release
 year. The schema documentation in the README describes the data as it is rather

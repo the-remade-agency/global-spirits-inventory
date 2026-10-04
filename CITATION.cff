@@ -21,7 +21,7 @@ authors:
 # cannot cite its own identifier. Add it immediately after the first mint and
 # every later release carries it.
 version: "v2026.10"
-date-released: "2026-10-01"
+date-released: "2026-10-04"
 # doi: "10.5281/zenodo.XXXXXXX"
 repository-code: "https://github.com/the-remade-agency/global-spirits-inventory"
 license: CC-BY-4.0

@@ -22,8 +22,8 @@ import collections
 import csv
 import io
 import re
+import os
 import subprocess
-import importlib.util
 import sys
 
 # The collection spec's upsert key. Distillery and spirit type join it here:
