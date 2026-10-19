@@ -23,7 +23,7 @@ import sys
 
 LOCAL = os.path.expanduser(os.environ.get(
     "SPIRITS_OUTPUTS",
-    "~/Documents/_local_drive/markdown_lib/inventory_research/_outputs"))
+    "~/vault/markdown_lib/inventory_research/_outputs"))
 DRIVE = os.path.expanduser(os.environ.get(
     "SPIRITS_ARCHIVE",
     "~/Library/CloudStorage/GoogleDrive-ericpace7@gmail.com/My Drive/x_code/inventory_research/_outputs"))

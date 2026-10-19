@@ -35,7 +35,7 @@ import sys
 # complete one, which a checksum gate must never read.
 VAULT = os.path.expanduser(os.environ.get(
     "SPIRITS_OUTPUTS",
-    "~/Documents/_local_drive/markdown_lib/inventory_research/_outputs"))
+    "~/vault/markdown_lib/inventory_research/_outputs"))
 
 # The QA working files package.py keeps out of the public build. Imported from
 # package.py rather than restated, so the gate cannot end up blocking on a file

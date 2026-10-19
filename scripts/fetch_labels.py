@@ -40,7 +40,7 @@ from package import has_value  # noqa: E402
 
 OUTPUTS = os.path.expanduser(os.environ.get(
     "SPIRITS_OUTPUTS",
-    "~/Documents/_local_drive/markdown_lib/inventory_research/_outputs"))
+    "~/vault/markdown_lib/inventory_research/_outputs"))
 LABELS = os.path.expanduser(os.environ.get(
     "SPIRITS_LABELS",
     "~/Library/CloudStorage/GoogleDrive-ericpace7@gmail.com/My Drive/x_code/inventory_research/labels"))
